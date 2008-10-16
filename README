@@ -4,8 +4,14 @@ to handle historic information from football matches.
 
 More info will come later
 
-Some facts:
+To Install:
+	- Pull from github (see github for details on using git)
+	- Install rubyonrails on you computer
+	- Install Hobo
+	
+	- for a simple sqlite3 database to test, rename the database_sample.yml file inside config, to database.yml 
 
+Some facts:
 	Application will be created in Rails using Hobo
 
 frode at meling dot name
