@@ -5,13 +5,113 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs>
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Club">Clubs</nav-item>
     <nav-item with="&Person">People</nav-item>
+    <nav-item with="&TeamRole">Team Roles</nav-item>
   </navigation>
 </def>
 
 
 
    
+<!-- ====== Club Pages ====== -->
+
+
+<def tag="index-page" for="Club">
+  <page merge title="Clubs">
+    <body: class="index-page club" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Clubs</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" merge-params/>      
+
+        <page-nav param="top-page-nav"/>
+      
+        <collection param/>
+      
+        <page-nav param="bottom-page-nav"/>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Club">
+  <page merge title="New Club">
+    <body: class="new-page club" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Club</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Club"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Club">
+  <page merge title="Club">
+
+    <body: class="show-page club" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading"><name/></h2>
+
+        <a action="edit" if="&can_edit?" param="edit-link">Edit Club</a>
+      </header>
+    
+      <section param="content-body">
+        <field-list fields="founded" param/>
+        <section param="collection-section">
+          <h3 param="collection-heading">Player Contracts</h3>
+              
+          <collection:player_contracts param/>
+
+          <a:player_contracts action="new" if="&can_create?(@club.player_contracts)" param="new-link">New Player Contract</a>
+        </section>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Club">
+  <page merge title="Edit Club">
+
+    <body: class="edit-page club" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading"><name/></h2>
+        <delete-button label="Remove This Club" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+  
 <!-- ====== Person Pages ====== -->
 
 
@@ -74,6 +174,13 @@
     
       <section param="content-body">
         <field-list fields="first_name, surname, address, postal_code, post_office, phone_home, phone_cell, phone_work, email, user" param/>
+        <section param="collection-section">
+          <h3 param="collection-heading">Player Contracts</h3>
+              
+          <collection:player_contracts param/>
+
+          <a:player_contracts action="new" if="&can_create?(@person.player_contracts)" param="new-link">New Player Contract</a>
+        </section>
       </section>
     </content:>
     
@@ -97,6 +204,263 @@
       </section>
     </content:>
     
+  </page>
+</def>
+
+
+
+  
+<!-- ====== PlayerContract Pages ====== -->
+
+
+<def tag="index-page" for="PlayerContract">
+  <page merge title="Player Contracts">
+    <body: class="index-page player-contract" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Player Contracts</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" merge-params/>      
+
+        <page-nav param="top-page-nav"/>
+      
+        <collection param/>
+      
+        <page-nav param="bottom-page-nav"/>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="PlayerContract">
+  <page merge title="New Player Contract">
+    <body: class="new-page player-contract" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Player Contract</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Player Contract"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="PlayerContract">
+  <page merge title="Player Contract">
+
+    <body: class="show-page player-contract" param/>
+
+    <content: param>
+      <header param="content-header">
+        <a:club param="parent-link">&laquo; <name/></a>
+        <h2 param="heading"><name/></h2>
+
+        <field-names-where-true fields="active" param/>
+
+        <a action="edit" if="&can_edit?" param="edit-link">Edit Player Contract</a>
+      </header>
+    
+      <section param="content-body">
+        <field-list fields="start_date, termination_date, contract_note, person" param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="PlayerContract">
+  <page merge title="Edit Player Contract">
+
+    <body: class="edit-page player-contract" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading"><name/></h2>
+        <delete-button label="Remove This Player Contract" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+<def tag="new-for-club-page" polymorphic/>
+<def tag="new-for-club-page" for="PlayerContract">
+  <page merge title="New Player Contract for #{name :with => @club}">
+    
+    <body: class="new-for-owner-page  player-contract" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">New Player Contract</h2>
+        <h3 class="subheading" param>For: <a with="&@club"/></h3>
+      </header>
+      
+      <section param="content-body">
+        <form owner="club" method="post" param>
+          <field-list: skip="club"/>
+          <submit: label="Create Player Contract"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+
+<def tag="new-for-person-page" polymorphic/>
+<def tag="new-for-person-page" for="PlayerContract">
+  <page merge title="New Player Contract for #{name :with => @person}">
+    
+    <body: class="new-for-owner-page  player-contract" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">New Player Contract</h2>
+        <h3 class="subheading" param>For: <a with="&@person"/></h3>
+      </header>
+      
+      <section param="content-body">
+        <form owner="person" method="post" param>
+          <field-list: skip="person"/>
+          <submit: label="Create Player Contract"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+
+  
+<!-- ====== TeamRole Pages ====== -->
+
+
+<def tag="index-page" for="TeamRole">
+  <page merge title="Team Roles">
+    <body: class="index-page team-role" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Team Roles</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" merge-params/>      
+
+        <page-nav param="top-page-nav"/>
+      
+        <collection param/>
+      
+        <page-nav param="bottom-page-nav"/>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="TeamRole">
+  <page merge title="New Team Role">
+    <body: class="new-page team-role" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Team Role</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Team Role"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="TeamRole">
+  <page merge title="Team Role">
+
+    <body: class="show-page team-role" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading"><name/></h2>
+
+        <a action="edit" if="&can_edit?" param="edit-link">Edit Team Role</a>
+      </header>
+    
+      <section param="content-body">
+        <field-list fields="person" param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="TeamRole">
+  <page merge title="Edit Team Role">
+
+    <body: class="edit-page team-role" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading"><name/></h2>
+        <delete-button label="Remove This Team Role" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+<def tag="new-for-person-page" polymorphic/>
+<def tag="new-for-person-page" for="TeamRole">
+  <page merge title="New Team Role for #{name :with => @person}">
+    
+    <body: class="new-for-owner-page  team-role" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">New Team Role</h2>
+        <h3 class="subheading" param>For: <a with="&@person"/></h3>
+      </header>
+      
+      <section param="content-body">
+        <form owner="person" method="post" param>
+          <field-list: skip="person"/>
+          <submit: label="Create Team Role"/>
+        </form>
+      </section>
+    </content:>
   </page>
 </def>
 

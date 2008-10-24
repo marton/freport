@@ -20,6 +20,12 @@ class Person < ActiveRecord::Base
   end
 
   belongs_to :user
+  
+  has_many :player_contracts, :dependent => :destroy
+  has_many :clubs, :through =>  :player_contracts
+  
+  has_many :team_roles
+  
   #
   def name
     "#{first_name} #{surname}"

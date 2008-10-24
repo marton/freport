@@ -9,3 +9,6 @@
 <def tag="app-name">fReport</def>
 
 
+<def tag="input" for="datetime">
+  <%= calendar_date_select_tag "p_date_and_time", this, :time => true %>
+</def>

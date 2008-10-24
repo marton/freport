@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081016200435) do
+ActiveRecord::Schema.define(:version => 20081024202719) do
+
+  create_table "club_roles", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clubs", :force => true do |t|
+    t.string   "name"
+    t.datetime "founded"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -24,6 +36,23 @@ ActiveRecord::Schema.define(:version => 20081016200435) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "player_contracts", :force => true do |t|
+    t.boolean  "active"
+    t.datetime "start_date"
+    t.datetime "termination_date"
+    t.text     "contract_note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "person_id"
+    t.integer  "club_id"
+  end
+
+  create_table "team_roles", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "person_id"
   end
 
   create_table "users", :force => true do |t|

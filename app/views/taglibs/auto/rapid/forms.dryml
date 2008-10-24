@@ -1,9 +1,42 @@
 <!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
 
+<def tag="form" for="Club">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, founded, player_contracts, players" param/>
+    <div param="actions">
+      <submit label="Save" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
 <def tag="form" for="Person">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="first_name, surname, address, postal_code, post_office, phone_home, phone_cell, phone_work, email, user" param/>
+    <field-list fields="first_name, surname, address, postal_code, post_office, phone_home, phone_cell, phone_work, email, clubs, player_contracts, team_roles, user" param/>
+    <div param="actions">
+      <submit label="Save" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+<def tag="form" for="PlayerContract">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="active, start_date, termination_date, contract_note, club, person" param/>
+    <div param="actions">
+      <submit label="Save" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+<def tag="form" for="TeamRole">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="person" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>

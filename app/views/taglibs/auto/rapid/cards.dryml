@@ -1,7 +1,42 @@
 <!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
 
+<def tag="card" for="Club">
+  <card class="club" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:player_contracts param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="ClubRole">
+  <card class="club-role" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="Person">
   <card class="person" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="PlayerContract">
+  <card class="player-contract" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="TeamRole">
+  <card class="team-role" param="default" merge>
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
