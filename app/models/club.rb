@@ -8,7 +8,7 @@ class Club < ActiveRecord::Base
     timestamps
   end
 
-  has_many :players, :through => :player_pontracts, :source => 'person'
+  has_many :players, :through => :player_contracts, :source => 'person'
   has_many :player_contracts, :dependent => :destroy
 
   # --- Hobo Permissions --- #
