@@ -169,6 +169,8 @@
       <header param="content-header">
         <h2 param="heading"><name/></h2>
 
+        <a:creator param="creator-link"/>
+
         <a action="edit" if="&can_edit?" param="edit-link">Edit Person</a>
       </header>
     

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081024202719) do
+ActiveRecord::Schema.define(:version => 20081025225825) do
 
   create_table "club_roles", :force => true do |t|
     t.datetime "created_at"
@@ -36,12 +36,13 @@ ActiveRecord::Schema.define(:version => 20081024202719) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "creator_id"
   end
 
   create_table "player_contracts", :force => true do |t|
     t.boolean  "active"
-    t.datetime "start_date"
-    t.datetime "termination_date"
+    t.date     "start_date"
+    t.date     "termination_date"
     t.text     "contract_note"
     t.datetime "created_at"
     t.datetime "updated_at"

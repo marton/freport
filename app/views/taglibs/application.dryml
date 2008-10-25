@@ -10,5 +10,17 @@
 
 
 <def tag="input" for="datetime">
-  <%= calendar_date_select_tag "p_date_and_time", this, :time => true %>
+  <%= calendar_date_select_tag param_name_for_this, this, :time => true %>
 </def>
+
+<def tag="input" for="date">
+  <%= calendar_date_select_tag param_name_for_this, this %>
+</def>
+
+<extend tag="page">
+	<old-page merge>
+		<append-scripts:>
+		  <%= calendar_date_select_includes %>
+		</append-scripts:>
+	</old-page>
+</extend>

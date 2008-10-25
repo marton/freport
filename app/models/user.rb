@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   end
   
   has_one :person
+  has_many :created_people, :class_name => "Person", :foreign_key => "creator_id"
   
   # This gives admin rights to the first sign-up.
   # Just remove it if you don't want that
